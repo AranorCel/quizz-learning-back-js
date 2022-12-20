@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <%- include('./partials/head') %>
 </head>
+
 <body>
+    <header>
+        <%- include('./partials/header') %>
+    </header>
     <main>
-        <%- include('./partials/home') %>
+        <%- include(template) %>
     </main>
+    <footer>
+        <%- include('./partials/footer') %>
+    </footer>
 </body>
+
 </html>

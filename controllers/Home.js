@@ -6,6 +6,6 @@ export default (req, res) => {
         .sort({ date: -1 })
         .exec((err, lessons) => {
             if (err) return console.error(err)
-            res.render("index", { lessons })
+            res.render("index", { template : "./templates/home", lessons })
         })
 }
