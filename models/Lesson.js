@@ -5,9 +5,9 @@ const lessonSchema = new mongoose.Schema(
     {
         title: { type: String, required: [true, "Titre obligatoire"] },
         author: { type: String, required: [true, "Nom d'auteur obligatoire"] },
-        discipline: { type: String, required: [true, "Discipline obligatoire"] },
-        cycle: { type: String, required: [true, "Description succinte obligatoire"] },
-        description: { type: String, required: [true, "Description succinte obligatoire"] },
+        discipline: { type: String, required: false },
+        cycle: { type: String, required: false },
+        description: { type: String, required: false },
         // l'image est optionnelle
         image: { type: String, required: false },
         //  la date sera générée automatiquement à la création de la leçon par 
