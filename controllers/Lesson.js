@@ -1,6 +1,5 @@
-import formidable from "formidable";
-import fs from "fs"
 import { Lesson } from "../models/Lesson.js";
+import multer from "multer"
 
 // Afficher les leçons
 export const LessonGet = async (req, res) => {
@@ -33,15 +32,27 @@ export const LessonGetById = async (req, res) => {
 
 // Ajouter une leçon
 export const LessonPost = (req, res) => {
+    // const storage = multer.diskStorage({
+    //     destination: (req, file, cb) => {
+    //         cb(null, "./public/data/uploads")
+    //     },
+    //     filename: (req, file, cb) => {
+    //         cb(null, Date.now() + "_" + file.originalname)
+    //     }
+    // })
+    const upload = multer({ dest : "./public/data/uploads" })
+    upload.single('upload_file');
 
     let lesson = new Lesson();
     lesson.title = req.body.title || "";
     lesson.author = req.body.author || "";
     lesson.discipline = req.body.discipline || "";
+    lesson.image = "/public/data/uploads/" + req.file;
     lesson.cycle = req.body.cycle || "";
     lesson.description = req.body.description || "";
     lesson.date = new Date();
 
+    console.log(req)
     lesson.save();
     return res.status(201).json(req.body)
 }
@@ -51,7 +62,7 @@ export const LessonDelete = async (req, res) => {
     let lesson;
     try {
         lesson = await Lesson.findById(req.body.id);
-        lesson.deleteOne({_id : req.body.id})
+        lesson.deleteOne({ _id: req.body.id })
     } catch (err) {
         return res.status(404).json({ message: `Rien a été trouvé.` });
     }
