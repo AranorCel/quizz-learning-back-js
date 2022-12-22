@@ -19,6 +19,8 @@ const studentSchema = new mongoose.Schema(
             date : Date,
             advices : String
         }],
+        isTeacher: Boolean,
+        isAdmin: Boolean,
     },
     {
         timestamps: true

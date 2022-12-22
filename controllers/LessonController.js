@@ -10,9 +10,9 @@ export const LessonGet = async (req, res) => {
         return res.status(500).json({ message: err });
     }
     if (!lesson) {
-        return res.status(404).json({ message: `Rien a été trouvé.` });
+        return res.status(404).json({ message: `Cette leçon n'existe pas.` });
     }
-    return res.status(200).json({ lesson })
+    return res.status(200).json( {lesson} )
 }
 
 // Afficher une leçon par son id
@@ -25,7 +25,7 @@ export const LessonGetById = async (req, res) => {
         return res.status(500).json({ message: err });
     }
     if (!lesson) {
-        return res.status(404).json({ message: `Rien a été trouvé.` });
+        return res.status(404).json({ message: `Cette leçon n'existe pas.` });
     }
     return res.status(200).json({ lesson })
 }
@@ -40,7 +40,7 @@ export const LessonPost = (req, res) => {
     //         cb(null, Date.now() + "_" + file.originalname)
     //     }
     // })
-    const upload = multer({ dest : "./public/data/uploads" })
+    const upload = multer({ dest: "./public/data/uploads" })
     upload.single('upload_file');
 
     let lesson = new Lesson();
@@ -52,7 +52,6 @@ export const LessonPost = (req, res) => {
     lesson.description = req.body.description || "";
     lesson.date = new Date();
 
-    console.log(req)
     lesson.save();
     return res.status(201).json(req.body)
 }
@@ -64,7 +63,7 @@ export const LessonDelete = async (req, res) => {
         lesson = await Lesson.findById(req.body.id);
         lesson.deleteOne({ _id: req.body.id })
     } catch (err) {
-        return res.status(404).json({ message: `Rien a été trouvé.` });
+        return res.status(404).json({ message: `Cette leçon n'existe plus.` });
     }
-    return res.status(200).json({ message: 'Successfully deleted' });
+    return res.status(200).json({ message: 'Suppression effectuée.' });
 }
