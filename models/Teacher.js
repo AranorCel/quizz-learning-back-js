@@ -7,8 +7,8 @@ const teacherSchema = new mongoose.Schema(
         password: { type: String, required: [true, "Mot de passe obligatoire"], minlength: 8 },
         firstname: { type: String, required: [true, "Prénom obligatoire"] },
         lastname: { type: String, required: [true, "Nom de famille obligatoire"] },
-        isTeacher: Boolean,
-        isAdmin: Boolean,
+        isTeacher: { type : Boolean, default : true},
+        isAdmin: { type : Boolean, default : false},
     },
     {
         timestamps: true
