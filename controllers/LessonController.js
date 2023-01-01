@@ -58,12 +58,16 @@ export const LessonPost = (req, res) => {
 
 //Supprimer une leçon par son id
 export const LessonDelete = async (req, res) => {
+    const id = req.params.id;
     let lesson;
     try {
-        lesson = await Lesson.findById(req.body.id);
-        lesson.deleteOne({ _id: req.body.id })
+        lesson = await Lesson.findByIdAndDelete(id);
+        
     } catch (err) {
-        return res.status(404).json({ message: `Cette leçon n'existe plus.` });
+        return res.status(500).json({ message: err });
+    }
+    if (!lesson) {
+        return res.status(404).json({ message: `Cette leçon n'existe pas.` });
     }
     return res.status(200).json({ message: 'Suppression effectuée.' });
 }
