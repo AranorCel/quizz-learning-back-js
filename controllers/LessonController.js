@@ -32,15 +32,16 @@ export const LessonGetById = async (req, res) => {
 
 // Ajouter une leçon
 export const LessonPost = (req, res) => {
-    // const storage = multer.diskStorage({
-    //     destination: (req, file, cb) => {
-    //         cb(null, "./public/data/uploads")
-    //     },
-    //     filename: (req, file, cb) => {
-    //         cb(null, Date.now() + "_" + file.originalname)
-    //     }
-    // })
-    const upload = multer({ dest: "./public/data/uploads" })
+    const storage = multer.diskStorage({
+        destination: function(req, file, cb) {
+          cb(null, 'uploads/');
+        },
+        filename: function(req, file, cb) {
+          cb(null, Date.now() + '-' + file.originalname);
+        }
+      });
+      const upload = multer({ storage });
+
     upload.single('upload_file');
 
     let lesson = new Lesson();
