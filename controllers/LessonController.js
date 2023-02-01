@@ -1,5 +1,6 @@
 import { Lesson } from "../models/Lesson.js";
 import multer from "multer"
+import dayjs from "dayjs"
 
 // Afficher les leçons
 export const LessonGet = async (req, res) => {
@@ -51,7 +52,8 @@ export const LessonPost = (req, res) => {
     lesson.image = "/public/data/uploads/" + req.file;
     lesson.cycle = req.body.cycle || "";
     lesson.description = req.body.description || "";
-    lesson.date = new Date();
+    lesson.date = dayjs().format('DD/MM/YYYY à HH[h]mm');
+    lesson.questions = req.body.questions || "";
 
     lesson.save();
     return res.status(201).json(req.body)

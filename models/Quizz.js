@@ -11,7 +11,7 @@ const quizzSchema = new mongoose.Schema(
         // l'image est optionnelle
         image: { type: String, required: false },
         //  la date sera générée automatiquement à la création de la leçon par 
-        date: { type: Date, required: false },
+        date: { type: String, required: false },
     },
     {
         timestamps: true

@@ -1,5 +1,6 @@
 import { Quizz } from "../models/Quizz.js";
 import multer from "multer"
+import dayjs from "dayjs"
 
 // Afficher les quizz
 export const QuizzGet = async (req, res) => {
@@ -51,7 +52,7 @@ export const QuizzPost = (req, res) => {
     quizz.image = "/public/data/uploads/" + req.file;
     quizz.cycle = req.body.cycle || "";
     quizz.description = req.body.description || "";
-    quizz.date = new Date();
+    quizz.date = dayjs().format('DD/MM/YYYY à HH[h]mm');
 
     quizz.save();
     return res.status(201).json(req.body)
