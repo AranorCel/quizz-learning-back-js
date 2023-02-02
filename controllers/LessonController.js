@@ -42,18 +42,20 @@ export const LessonPost = (req, res) => {
         }
       });
       const upload = multer({ storage });
-
+     
     upload.single('upload_file');
+    console.log(upload, storage)
 
     let lesson = new Lesson();
     lesson.title = req.body.title || "";
     lesson.author = req.body.author || "";
     lesson.discipline = req.body.discipline || "";
+    
     lesson.image = "/public/data/uploads/" + req.file;
     lesson.cycle = req.body.cycle || "";
     lesson.description = req.body.description || "";
     lesson.date = dayjs().format('DD/MM/YYYY à HH[h]mm');
-    lesson.questions = req.body.questions || "";
+    lesson.knowledges = req.body.knowledges;
 
     lesson.save();
     return res.status(201).json(req.body)

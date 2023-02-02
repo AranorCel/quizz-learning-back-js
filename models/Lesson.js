@@ -12,7 +12,7 @@ const lessonSchema = new mongoose.Schema(
         image: { type: String, required: false },
         //  la date sera générée automatiquement à la création de la leçon par 
         date: { type: String, required: false },
-        questions : {type : Object, required : false},
+        knowledges : [{type : Object, required : false}],
     },
     {
         timestamps: true

@@ -49,10 +49,12 @@ export const QuizzPost = (req, res) => {
     quizz.title = req.body.title || "";
     quizz.author = req.body.author || "";
     quizz.discipline = req.body.discipline || "";
+
     quizz.image = "/public/data/uploads/" + req.file;
     quizz.cycle = req.body.cycle || "";
     quizz.description = req.body.description || "";
     quizz.date = dayjs().format('DD/MM/YYYY à HH[h]mm');
+    quizz.tests = req.body.tests;
 
     quizz.save();
     return res.status(201).json(req.body)
