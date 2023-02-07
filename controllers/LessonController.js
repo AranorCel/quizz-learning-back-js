@@ -44,7 +44,7 @@ export const LessonPost = (req, res) => {
       const upload = multer({ storage });
      
     upload.single('upload_file');
-    console.log(upload, storage)
+    /* console.log(upload, storage) */
 
     let lesson = new Lesson();
     lesson.title = req.body.title || "";
