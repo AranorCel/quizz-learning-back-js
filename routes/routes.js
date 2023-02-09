@@ -2,12 +2,13 @@ import express from 'express';
 import { HomeLessonGet } from '../controllers/HomeController.js';
 import { LessonDelete, LessonGet, LessonGetById, LessonPost } from '../controllers/LessonController.js';
 import { LoginStudent, LoginTeacher } from '../controllers/LoginController.js';
+import { QuizzDelete, QuizzGet, QuizzPost, QuizzGetById } from '../controllers/QuizzController.js';
 import { TeacherSignUp } from '../controllers/TeacherController.js';
 import Auth from '../middlewares/Auth.js'
-import { QuizzDelete, QuizzGet, QuizzPost, QuizzGetById } from '../controllers/QuizzController.js';
 
 const router = express.Router();
 
+// Définition de la route Home
 router.get('/api/home', Auth, HomeLessonGet);
 
 router.get('/api/lesson', LessonGet);
