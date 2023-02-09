@@ -45,6 +45,27 @@ export const QuizzPost = (req, res) => {
     quizz.save();
     return res.status(201).json(req.body);
 }
+// Actualiser un quizz après l'avoir identifié par son id
+export const QuizzPutById = async (req, res) => {
+    let quizz;
+    if (Quizz.findOne({ _id: req.params.id })) {
+        return res.status(400).json({ message: 'Ce quizz existe toujours.' });
+    }
+    try {
+        delete req.body._id
+        quizz = await Quizz.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true },
+        );
+    } catch (err) {
+        return res.status(500).json({ message: err });
+    }
+    if (!quizz) {
+        return res.status(404).json({ message: `Ce quizz n'existe pas.` });
+    }
+    return res.status(201).json(req.body);
+}
 
 //Supprimer un quizz par son id
 export const QuizzDelete = async (req, res) => {

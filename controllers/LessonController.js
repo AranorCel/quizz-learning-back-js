@@ -1,7 +1,6 @@
 import { Lesson } from "../models/Lesson.js";
 import dayjs from "dayjs";
-import fs from "fs";
-import formidable from "formidable";
+
 
 // Afficher les leçons
 export const LessonGet = async (req, res) => {
@@ -47,6 +46,28 @@ export const LessonPost = (req, res) => {
     lesson.save();
     return res.status(201).json(req.body);
 
+}
+
+// Actualiser une leçon après l'avoir identifié par son id
+export const LessonPutById = async (req, res) => {
+    let lesson;
+    if (Lesson.findOne({ _id: req.params.id })) {
+        return res.status(400).json({ message: 'Cette leçon existe toujours.' });
+    }
+    try {
+        delete req.body._id
+        lesson = await Lesson.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true },
+        );
+    } catch (err) {
+        return res.status(500).json({ message: err });
+    }
+    if (!lesson) {
+        return res.status(404).json({ message: `Cette leçon n'existe pas.` });
+    }
+    return res.status(201).json(req.body);
 }
 
 //Supprimer une leçon par son id
