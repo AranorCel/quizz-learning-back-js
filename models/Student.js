@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-// Création du schéma d'un élève
+// Création du schéma d'un élève à implanter dans la V2. Limites RGPD. Possibilité de créer des listes d'élèves à partir d'un login et d'un mot de passe généré aléatoirement avec envoi d'un lien. Pour cette V1, l'ensemble des visiteurs peuvent donc profiter des leçons et expérimenter les quizz. C'est une bêta test qui facilite les retours.
 const studentSchema = new mongoose.Schema(
     {
         firstname: { type: String, required: [true, "Prénom obligatoire"] },
@@ -19,8 +19,6 @@ const studentSchema = new mongoose.Schema(
             date : Date,
             advices : String
         }],
-        isTeacher: Boolean,
-        isAdmin: Boolean,
     },
     {
         timestamps: true

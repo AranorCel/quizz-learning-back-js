@@ -48,12 +48,9 @@ export const LessonPost = (req, res) => {
 
 }
 
-// Actualiser une leçon après l'avoir identifié par son id
+// Actualiser une leçon après l'avoir identifiée par son id
 export const LessonPutById = async (req, res) => {
     let lesson;
-    if (Lesson.findOne({ _id: req.params.id })) {
-        return res.status(400).json({ message: 'Cette leçon existe toujours.' });
-    }
     try {
         delete req.body._id
         lesson = await Lesson.findByIdAndUpdate(

@@ -48,9 +48,6 @@ export const QuizzPost = (req, res) => {
 // Actualiser un quizz après l'avoir identifié par son id
 export const QuizzPutById = async (req, res) => {
     let quizz;
-    if (Quizz.findOne({ _id: req.params.id })) {
-        return res.status(400).json({ message: 'Ce quizz existe toujours.' });
-    }
     try {
         delete req.body._id
         quizz = await Quizz.findByIdAndUpdate(
